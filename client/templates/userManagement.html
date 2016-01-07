@@ -3,12 +3,12 @@
     <div class="panel panel-default userBox">
       <div class="panel-body">
         {{# if currentUser}}
-        <!-- Message for logged in user -->
-        <p>Hello <strong>@{{currentUser.username}}</strong>, welcome to twitterClone</p>
+        <!-- show welcome message if logged in user -->
+        <p>Hello <strong>@{{currentUser.username}}</strong>, welcome to Magellan</p>
         <button type="button" class="btn btn-info fullbutton" id="logout">Log out</button>
 
         {{else}}
-        <!-- Log in module -->
+        <!-- else show log in module -->
         <h4>Already have an account?</h4>
         <div class="form-group">
           <input class="form-control input-sm" id="login-username" placeholder="Username">

@@ -1,4 +1,5 @@
 Template.userManagement.events({
+  // listen for clicks on signup button
   'click #signup': function() {
     var user = {
       username: $('#signup-username').val(),
@@ -8,6 +9,7 @@ Template.userManagement.events({
       }
     };
 
+    // made available via accounts-ui package
     Accounts.createUser(user, function (error) {
       if(error) alert(error);
     });
@@ -17,6 +19,7 @@ Template.userManagement.events({
     var username = $('#login-username').val();
     var password = $('#login-password').val();
 
+    // Attempt to login user
     Meteor.loginWithPassword(username, password, function(error) {
       if(error) alert(error);
     });

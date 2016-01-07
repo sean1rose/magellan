@@ -12,6 +12,7 @@ Template.tweetBox.helpers({
   },
 
   disableButton: function() {
+    // can't click tweet button if too long/short/not logged in
     if (Session.get('numChars') <= 0 ||
         Session.get('numChars') > 140 ||
         !Meteor.user()) {
@@ -20,6 +21,7 @@ Template.tweetBox.helpers({
   }
 });
 
+// event listener
 Template.tweetBox.events({
   'input #tweetText': function(){
     Session.set('numChars', $('#tweetText').val().length);
@@ -29,6 +31,7 @@ Template.tweetBox.events({
     var tweet = $('#tweetText').val();
     $('#tweetText').val("");
     Session.set('numChars', 0);
+    // if logged in as an authenticated user, insert data (including username), into mongodb
     Meteor.call('insertTweet', tweet);
   }
 });
