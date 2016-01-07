@@ -8,14 +8,15 @@ Template.followUsers.helpers({
   }
 });
 
-
 Template.followUsers.events({
-  'submit form': function(event) {
+  'submit form': function(event){
+    // by using form element in html, can access form values via the event argument; here we're grabbing value from searchUser id
     var searchUser = event.target.searchUser.value;
-
-    var foundUser = Meteor.call('findUser', searchUser, function(err, res) {
+    // findUser and foundUser will be defined on server side
+    var foundUser = Meteor.call('findUser', searchUser, function(err, res){
       if (res) Session.set('foundUser', res);
     });
+    // return false to prevent page refresh
     return false;
   },
 
@@ -27,7 +28,6 @@ Template.followUsers.events({
     Meteor.call('followUser', this.username);
   }
 });
-
 
 Template.followUsers.onRendered(function () {
   Meteor.call('recommendUsers', function(err, res) {
