@@ -1,9 +1,10 @@
 Template.followUsers.helpers({
-  'foundUser': function() {
+  // getters
+  'foundUser': function(){
     return Session.get('foundUser');
   },
 
-  'recommendedUsers': function() {
+  'recommendedUsers': function(){
     return Session.get('recommendedUsers');
   }
 });
@@ -20,7 +21,9 @@ Template.followUsers.events({
     return false;
   },
 
-  'click #follow': function() {
+  // click on html element w/ id 'follow'...
+  'click #follow': function(){
+    // calling server-defined method directly in the client
     Meteor.call('followUser', Session.get('foundUser').username);
   },
 

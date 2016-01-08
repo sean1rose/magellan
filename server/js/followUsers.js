@@ -1,15 +1,14 @@
 Meteor.methods({
-  'findUser': function(username) {
+  'findUser': function(username){
+    // mongodb call to find the username, argument stems originally from client call Meteor.call('findUser')...
     return Meteor.users.findOne({
       username: username
     }, {
-      fields: {
-        'username': 1
-      }
+      fields: {'username': 1}
     });
   },
 
-  'followUser': function(username) {
+  'followUser': function(username){
     Relationships.insert({
       follower: Meteor.user().username,
       following: username
