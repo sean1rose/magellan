@@ -27,6 +27,7 @@ Template.tweetBox.events({
     Session.set('numChars', $('#tweetText').val().length);
   },
 
+  // client side to insert data into db
   'click button': function() {
     var tweet = $('#tweetText').val();
     $('#tweetText').val("");

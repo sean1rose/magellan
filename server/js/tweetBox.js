@@ -1,4 +1,5 @@
 Meteor.methods({
+  //data insertion of a tweet on the client side to server side
   insertTweet: function(tweet) {
     if (Meteor.user()) {
       Tweets.insert({

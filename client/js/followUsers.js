@@ -27,13 +27,15 @@ Template.followUsers.events({
     Meteor.call('followUser', Session.get('foundUser').username);
   },
 
-  'click #followRec': function(event) {
+  // listen for click event on followRec id (use this to refer to context in for-loop iteration)
+  'click #followRec': function(event){
     Meteor.call('followUser', this.username);
   }
 });
 
-Template.followUsers.onRendered(function () {
-  Meteor.call('recommendUsers', function(err, res) {
-    Session.set('recommendedUsers', res);
+// As page renders, make call to recommendUsers server method to get a list of potential follow candidates
+Template.followUsers.onRendered(function(){
+  Meteor.call('recommendUsers', function(err, res){
+    Session.set('recommendUsers', res);
   });
 });

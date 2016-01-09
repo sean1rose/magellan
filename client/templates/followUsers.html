@@ -18,8 +18,10 @@
         <!-- List of people to follow -->
         <div class="recommend-users">
           <h5>Who to follow:</h5>
+          <!-- recommendedUsers is a helper method returning an array of content -->
           {{#each recommendedUsers}}
-            <p><button type="button" class="btn btn-default" id="followRec">Follow @{{this.username}}</button></p>
+          <!-- use this to refer to context in the each-for loop -->
+          <p><button type="button" class="btn btn-default" id="followRec">Follow @{{this.username}}</button></p>
           {{/each}}
         </div>
       </div>

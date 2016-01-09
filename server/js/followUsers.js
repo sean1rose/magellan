@@ -15,8 +15,9 @@ Meteor.methods({
     });
   },
 
-  'recommendUsers': function() {
-    if (Meteor.user()) {
+  'recommendUsers': function(){
+    if (Meteor.user()){
+      // returns list of users already following
       var currentFollowings = UserUtils.findFollowings(Meteor.user().username);
 
       var recUsers = Meteor.users.find({
@@ -24,11 +25,12 @@ Meteor.methods({
           $nin: currentFollowings
         }
       }, {
-        fields: { 'username': 1 },
+        fields: {'username': 1},
         limit: 5
       }).fetch();
 
       return recUsers;
     }
   }
+
 });
