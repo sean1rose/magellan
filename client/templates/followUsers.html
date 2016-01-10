@@ -3,19 +3,20 @@
   <div class="follow-container">
     <div class="panel panel-default followBox">
       <div class="panel-body">
-        <!-- Input box for user to follow -->
+        <!-- 1) Input box for user to follow -->
         <form class="form-inline">
           <input type="text" class="form-control" id="searchUser" placeholder="Search for user">
           <button type="submit" class="btn btn-info">Search</button>
         </form>
-        <!-- Display box found through search-->
+
+        <!-- 2) Display box found through search, using info retrieved from server-->
         {{#if foundUser}}
         <div class="found-user">
           <button type="button" class="btn btn-default" id="follow">Follow @{{foundUser.username}}</button>
         </div>
         {{/if}}
 
-        <!-- List of people to follow -->
+        <!-- 3) List of people to follow -->
         <div class="recommend-users">
           <h5>Who to follow:</h5>
           <!-- recommendedUsers is a helper method returning an array of content -->
