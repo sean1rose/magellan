@@ -1,5 +1,6 @@
 // terminal
 
+/*
 // with autopublish removed, need to define what data should be available to users of the application
 // 'tweets' becomes the name of the published data, which is basically all data from Tweets collection
 Meteor.publish('tweets', function(){
@@ -14,4 +15,26 @@ Meteor.publish('tweets', function(){
     currentFollowings.push(username);
     return Tweets.find({user: { $in: currentFollowings}});
   }
+});
+*/
+
+Meteor.publishComposite('tweets', function(username){
+  return {
+    // watches for changes in the Relationships db
+    find: function(){
+      // returns a reactive cursor for a list of relationships, which is passed to each of the child's find() function
+      return Relationships.find({follower: username});
+    },
+    children: [{
+      find: function(relationship){
+        // the child will then query for Tweets associated w/ each user passed into it
+        return Tweets.find({user: relationship.following});
+      }
+    }]
+  }
+});
+
+// want to see own tweets
+Meteor.publish('ownTweets', function(username){
+  return Tweets.find({user: username});
 });
