@@ -6,6 +6,7 @@ Template.tweetFeed.helpers({
   }
 });
 
+// client subscription to server publishing of tweets
 Template.tweetFeed.onCreated(function() {
   console.error('in the subscribe');
   this.subscribe('tweets');
