@@ -4,8 +4,10 @@ Meteor.methods({
     if (Meteor.user()) {
       Tweets.insert({
         message: tweet,
-        user: Meteor.user().username
+        user: Meteor.user().username,
+        timestamp: new Date()
       });
+      console.error('insert tweet - ', tweet);
     }
   }
 });

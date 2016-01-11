@@ -5,7 +5,28 @@ Template.followUsers.helpers({
   },
 
   'recommendedUsers': function(){
-    return Session.get('recommendedUsers');
+    if (Meteor.user()) {
+      var currentFollowings = UserUtils.findFollowings(Meteor.user().username);
+
+      var recUsers = Meteor.users.find({
+        username: {
+          $nin: currentFollowings
+        }
+      }, {
+        fields: { 'username': 1 },
+        limit: 5
+      }).fetch();
+
+      return recUsers;
+    }
+    // return Session.get('recommendedUsers');
+  },
+
+  'currentFollowings': function(){
+    console.error('current! - ', Session.get('currentFollowings'));
+    console.error('current!2 - ', UserUtils.findFollowings(Meteor.user().username));
+    return UserUtils.findFollowings(Meteor.user().username);
+    // return Session.get('currentFollowings');
   }
 });
 
@@ -17,6 +38,8 @@ Template.followUsers.events({
     var foundUser = Meteor.call('findUser', searchUser, function(err, res){
       if (res) Session.set('foundUser', res);
     });
+    console.log('0 - insert follow user - ', searchUser);
+    $('#searchUser').val("");
     // return false to prevent page refresh
     return false;
   },
@@ -34,8 +57,16 @@ Template.followUsers.events({
 });
 
 // As page renders, make call to recommendUsers server method to get a list of potential follow candidates
+Template.followUsers.onCreated(function(){
+  if (Meteor.user()){
+    this.subscribe('users', Meteor.user().username);
+    this.subscribe('followings', Meteor.user().username);
+  }
+})
+
 Template.followUsers.onRendered(function(){
   Meteor.call('recommendUsers', function(err, res){
-    Session.set('recommendUsers', res);
+    console.error('recommendedUsers!! -');
+    Session.set('recommendedUsers', res);
   });
 });

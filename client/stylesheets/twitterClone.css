@@ -63,3 +63,12 @@
 .follow-container h5 {
   color: gray;
 }
+
+.tweetfeed {
+  background-color: rgb(240, 247, 254);
+}
+
+.tweetfeed-container {
+  margin: 30px;
+  margin-left: 10px;
+}

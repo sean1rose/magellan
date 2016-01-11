@@ -1,4 +1,5 @@
 Template.tweetBox.helpers({
+  // tweetbox getters
   charCount: function() {
     return 140 - Session.get('numChars');
   },
@@ -34,6 +35,7 @@ Template.tweetBox.events({
     Session.set('numChars', 0);
     // if logged in as an authenticated user, insert data (including username), into mongodb
     Meteor.call('insertTweet', tweet);
+    console.error('tweet added on client side submit -', tweet);
     // insertTweet is the server side function call
   }
 });

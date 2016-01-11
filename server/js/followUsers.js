@@ -9,6 +9,7 @@ Meteor.methods({
   },
 
   'followUser': function(username){
+    console.error('server side follow user');
     Relationships.insert({
       follower: Meteor.user().username,
       following: username
@@ -29,8 +30,14 @@ Meteor.methods({
         limit: 5
       }).fetch();
 
+      console.error('server side - ', recUsers);
       return recUsers;
     }
+  },
+
+  'currentFollowings': function(){
+    console.error('currentFollowings in server ! - ', UserUtils.findFollowings(Meteor.user().username));
+    return UserUtils.findFollowings(Meteor.user().username);
   }
 
 });
