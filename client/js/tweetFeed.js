@@ -14,7 +14,7 @@ Template.tweetFeed.onCreated(function() {
   console.error('in the subscribe');
   // this.subscribe('tweets');
 
-  // allows for reactive join that updates your twiiter feed as you follow new users
+  // allows for reactive join that updates your twiter feed as you follow new users
   if (Meteor.user()) {
     this.subscribe('tweets', Meteor.user().username);
     this.subscribe('ownTweets', Meteor.user().username);

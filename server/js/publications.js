@@ -38,3 +38,16 @@ Meteor.publishComposite('tweets', function(username){
 Meteor.publish('ownTweets', function(username){
   return Tweets.find({user: username});
 });
+
+// List of all usernames
+Meteor.publish('users', function(username){
+  return Meteor.users.find({}, {
+    fields: { 'username': 1 },
+    limit: 100
+  });
+});
+
+// list of all usernames the current user is following
+Meteor.publish('followings', function(username){
+  return Relationships.find({ follower: username });
+});
