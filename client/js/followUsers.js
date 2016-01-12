@@ -23,8 +23,6 @@ Template.followUsers.helpers({
   },
 
   'currentFollowings': function(){
-    console.error('current! - ', Session.get('currentFollowings'));
-    console.error('current!2 - ', UserUtils.findFollowings(Meteor.user().username));
     return UserUtils.findFollowings(Meteor.user().username);
     // return Session.get('currentFollowings');
   }
@@ -38,7 +36,6 @@ Template.followUsers.events({
     var foundUser = Meteor.call('findUser', searchUser, function(err, res){
       if (res) Session.set('foundUser', res);
     });
-    console.log('0 - insert follow user - ', searchUser);
     $('#searchUser').val("");
     // return false to prevent page refresh
     return false;
@@ -66,7 +63,6 @@ Template.followUsers.onCreated(function(){
 
 Template.followUsers.onRendered(function(){
   Meteor.call('recommendUsers', function(err, res){
-    console.error('recommendedUsers!! -');
     Session.set('recommendedUsers', res);
   });
 });

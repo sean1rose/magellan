@@ -11,9 +11,6 @@ Template.tweetFeed.helpers({
 
 // client subscription to server publishing of tweets
 Template.tweetFeed.onCreated(function() {
-  console.error('in the subscribe');
-  // this.subscribe('tweets');
-
   // allows for reactive join that updates your twiter feed as you follow new users
   if (Meteor.user()) {
     this.subscribe('tweets', Meteor.user().username);

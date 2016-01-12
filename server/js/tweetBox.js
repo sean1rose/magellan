@@ -7,7 +7,6 @@ Meteor.methods({
         user: Meteor.user().username,
         timestamp: new Date()
       });
-      console.error('insert tweet - ', tweet);
     }
   }
 });
